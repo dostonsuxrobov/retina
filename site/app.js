@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
+import { validateShed, buildShed } from './shed.js?v=1';
 
 const example = {
   schema: 'retina.blueprint/v1',
@@ -35,6 +36,7 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#edf1f0');
 scene.fog = new THREE.Fog('#edf1f0', 280, 900);
 const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 2000);
+camera.up.set(0, 0, 1);
 let renderer;
 let usingVectorFallback = false;
 try {
@@ -111,6 +113,7 @@ function roundedRectangle(width, height, radius) {
 
 function validateBlueprint(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new Error('The file must contain a JSON object.');
+  if (['retina.shed/v1', 'retina.shed/proposed-v1'].includes(value.schema)) return validateShed(value);
   if (value.schema !== 'retina.blueprint/v1') throw new Error('Use schema "retina.blueprint/v1".');
   if (value.units !== 'mm') throw new Error('This prototype expects dimensions in millimetres ("mm").');
   if (!value.body || value.body.type !== 'plate') throw new Error('This first prototype supports a plate body.');
@@ -143,6 +146,23 @@ function rounded(value) {
 }
 
 function buildGeometry(blueprint) {
+  modelRoot.traverse(obj => {
+    obj.geometry?.dispose();
+    for (const material of Array.isArray(obj.material) ? obj.material : [obj.material]) material?.dispose();
+  });
+  modelRoot.clear();
+  if (blueprint.body.type === 'shed') {
+    modelRoot.add(buildShed(blueprint));
+    new THREE.Box3().setFromObject(modelRoot).getSize(modelSize);
+    modelName.textContent = blueprint.name || 'Garden shed';
+    bodySummary.textContent = `${rounded(blueprint.body.width)} × ${rounded(blueprint.body.depth)} × ${rounded(blueprint.body.wall_height + blueprint.roof.rise)} mm (ridge)`;
+    featureSummary.textContent = `${blueprint.openings.length} openings · ${blueprint.details.length} details`;
+    const inferred = blueprint.evidence?.inferred ?? [];
+    inferenceSummary.textContent = inferred.length ? inferred.join(' · ') : 'None specified';
+    inferenceSummary.title = inferred.join('\n');
+    frameModel();
+    return;
+  }
   const { width, height, thickness, corner_radius: radius = 0 } = blueprint.body;
   const shape = roundedRectangle(width, height, radius);
   for (const hole of blueprint.features) {
@@ -151,7 +171,6 @@ function buildGeometry(blueprint) {
     shape.holes.push(holePath);
   }
 
-  modelRoot.clear();
   const geometry = new THREE.ExtrudeGeometry(shape, {
     depth: thickness,
     bevelEnabled: false,
@@ -188,11 +207,17 @@ function buildGeometry(blueprint) {
 function frameModel() {
   const max = Math.max(modelSize.x, modelSize.y, modelSize.z);
   const distance = (max / 2 / Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))) * 1.75;
-  camera.position.set(distance * 0.83, -distance * 0.9, distance * 0.75);
+  const bounds = new THREE.Box3().setFromObject(modelRoot);
+  const center = bounds.getCenter(new THREE.Vector3());
+  camera.position.set(center.x + distance * 0.83, center.y - distance * 0.9, center.z + distance * 0.75);
   camera.near = Math.max(0.1, distance / 1000);
   camera.far = distance * 10;
   camera.updateProjectionMatrix();
-  controls.target.set(0, 0, 0);
+  controls.target.copy(center);
+  scene.fog.near = distance * 2;
+  scene.fog.far = distance * 6;
+  grid.scale.setScalar(max / 150);
+  grid.position.z = bounds.min.z - max * 0.01;
   controls.minDistance = Math.max(10, max * 0.65);
   controls.maxDistance = max * 12;
   controls.update();
@@ -267,6 +292,8 @@ document.querySelector('#export-glb').addEventListener('click', () => {
   const exportRoot = modelRoot.clone(true);
   // Blueprint dimensions are authored in millimetres; glTF scene units are metres.
   exportRoot.scale.setScalar(0.001);
+  // The workbench uses Z-up; glTF uses Y-up.
+  exportRoot.rotation.x = -Math.PI / 2;
   new GLTFExporter().parse(exportRoot, (result) => {
     download(result, safeFilename(blueprint.name, 'glb'), 'model/gltf-binary');
   }, (error) => setMessage(`GLB export failed: ${error.message}`, true), { binary: true });

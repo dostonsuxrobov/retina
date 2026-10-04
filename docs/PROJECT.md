@@ -40,3 +40,11 @@ Build an efficient visual perception/reconstruction layer: pixels become structu
 ## Next step
 
 Use a real reference image to produce a blueprint and test it in the app. Record which dimensions were supplied versus inferred, inspect the GLB in a 3D viewer, then decide whether to refine the plate recipe or support a second object category.
+
+## Shed input fix — 2026-10-03
+
+A shed blueprint was previously provided in an unsupported draft format, causing validation to fail. Added a separate deterministic shed builder and `retina.shed/v1` schema with compatibility for that original draft file. Added actual wall cutouts, door/window assemblies, a gable roof, trim, siding seams, and cupola. Camera framing, Z-up orientation, grid size, and fog now adapt to building dimensions. Added a downloadable shed example.
+
+Validated the original JSON with real Three.js geometry: 223 meshes, finite vertex/bounding values, four wall opening ray checks, and seven malformed-input rejection cases. Verified binary GLB export and millimetre-to-metre root scaling. JavaScript syntax checks passed. Browser automation could not run in this session because the local browser executable was unavailable; visual fidelity and live WebGL interactions remain to be checked.
+
+Next: load the original shed file in the deployed app, inspect its proportions against the photo, then supply one measured dimension to establish scale. This is a coarse architectural recipe, not validated industrial reconstruction.

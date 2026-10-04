@@ -41,3 +41,11 @@ The app rejects unsupported body and feature types, non-positive dimensions, and
 ## Try it
 
 Open the GitHub Pages site, edit the sample, choose a `.json` file, or paste a blueprint and select **Build preview**. Drag to orbit and scroll to zoom. Export the validated geometry with **Export GLB**.
+
+## Shed recipe (v0.2)
+
+The app also accepts `retina.shed/v1`, and accepts the earlier `retina.shed/proposed-v1` file unchanged. See `site/examples/shed-blueprint.json` for the complete contract. Coordinates use +Z up, a centered floor at ground level, front -Y, and right +X. Dimensions are millimetres. Wall opening `center_offset` is world X for front/rear and world Y for right/left; `bottom` is height above ground.
+
+Required sections are `body`, `roof`, `walls`, `trim`, `openings`, and `details`. The recipe supports a rectangular shed, vertical panel siding, a gable roof with ridge along Y, single/double doors, windows, glazing grids, shutters, simple flower boxes, strap hinges, gable vents, and a centered ridge cupola with a hip roof. Wall meshes have real opening cutouts. All opening dimensions must fit within the wall; overlapping openings are rejected. Export converts millimetres to metres as for plates.
+
+This is an illustrative architectural model. It does not reproduce photographic textures, plants, framing, roof shingles, construction joints, or manufacturing tolerances. Measurements and hidden geometry are assumptions, recorded in evidence. The reference image alone establishes no physical scale.

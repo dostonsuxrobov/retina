@@ -1,0 +1,161 @@
+{
+  "schema": "retina.shed/v1",
+  "name": "Garden shed from reference photo",
+  "units": "mm",
+  "compatibility": {
+    "status": "supported",
+    "requires": "Retina geometry v0.2 or later"
+  },
+  "coordinates": {
+    "up": "+z",
+    "origin": "center of floor at ground level",
+    "front": "-y",
+    "right": "+x"
+  },
+  "body": {
+    "type": "shed",
+    "width": 3000,
+    "depth": 4200,
+    "wall_height": 2300,
+    "wall_thickness": 100,
+    "floor_thickness": 100
+  },
+  "roof": {
+    "type": "gable",
+    "ridge_axis": "y",
+    "rise": 1000,
+    "overhang": 200,
+    "thickness": 80,
+    "color": "#888B8D"
+  },
+  "walls": {
+    "style": "vertical_panel_siding",
+    "panel_spacing": 200,
+    "color": "#7C8274"
+  },
+  "trim": {
+    "width": 100,
+    "depth": 25,
+    "color": "#E8DDC4"
+  },
+  "openings": [
+    {
+      "id": "front_double_doors",
+      "type": "double_door",
+      "wall": "front",
+      "center_offset": 0,
+      "bottom": 100,
+      "width": 1700,
+      "height": 2050,
+      "color": "#ADA897",
+      "top_glazing": {
+        "height": 300,
+        "bottom_from_door_base": 1650,
+        "panes_per_leaf": {
+          "columns": 4,
+          "rows": 1
+        }
+      },
+      "hardware": {
+        "color": "#252522",
+        "style": "strap_hinges"
+      }
+    },
+    {
+      "id": "right_window_front",
+      "type": "window",
+      "wall": "right",
+      "center_offset": -1300,
+      "bottom": 900,
+      "width": 650,
+      "height": 1100,
+      "panes": {
+        "columns": 2,
+        "rows": 3
+      },
+      "shutters": true,
+      "flower_box": true
+    },
+    {
+      "id": "right_door",
+      "type": "single_door",
+      "wall": "right",
+      "center_offset": 0,
+      "bottom": 100,
+      "width": 850,
+      "height": 2050,
+      "color": "#ADA897",
+      "top_glazing": {
+        "height": 350,
+        "bottom_from_door_base": 1600,
+        "panes": {
+          "columns": 4,
+          "rows": 1
+        }
+      }
+    },
+    {
+      "id": "right_window_rear",
+      "type": "window",
+      "wall": "right",
+      "center_offset": 1300,
+      "bottom": 900,
+      "width": 650,
+      "height": 1100,
+      "panes": {
+        "columns": 2,
+        "rows": 3
+      },
+      "shutters": true,
+      "flower_box": true
+    }
+  ],
+  "details": [
+    {
+      "type": "gable_vent",
+      "wall": "front",
+      "center_offset": 0,
+      "bottom": 2700,
+      "width": 400,
+      "height": 200,
+      "color": "#E8DDC4"
+    },
+    {
+      "type": "cupola",
+      "center": {
+        "x": 0,
+        "y": 0
+      },
+      "base_width": 450,
+      "base_depth": 450,
+      "height": 500,
+      "roof": "hip",
+      "color": "#E8DDC4",
+      "roof_color": "#656B70"
+    }
+  ],
+  "evidence": {
+    "observed": [
+      "Shed with vertical sage-gray siding and light trim",
+      "Gable roof with gray shingles and a small cupola",
+      "Double doors on the gable end",
+      "Single door between two windows on the visible right wall",
+      "Window shutters and flower boxes",
+      "Dark strap hinges"
+    ],
+    "inferred": [
+      "All numerical dimensions and exact colors are illustrative estimates",
+      "A 3000 by 4200 mm footprint is assumed; the image provides no scale",
+      "Roof rise, wall thickness, opening positions, glazing subdivisions, and cupola dimensions are estimated",
+      "Hidden walls are assumed solid; interior geometry is unspecified"
+    ],
+    "unknown": [
+      "Actual dimensions and roof pitch",
+      "Hidden openings and rear facade",
+      "Structural framing, foundations, and interior layout"
+    ],
+    "excluded": [
+      "Trees, shrubs, flower beds, lawn, and path"
+    ]
+  }
+}
