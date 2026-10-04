@@ -49,3 +49,9 @@ The app also accepts `retina.shed/v1`, and accepts the earlier `retina.shed/prop
 Required sections are `body`, `roof`, `walls`, `trim`, `openings`, and `details`. The recipe supports a rectangular shed, vertical panel siding, a gable roof with ridge along Y, single/double doors, windows, glazing grids, shutters, simple flower boxes, strap hinges, gable vents, and a centered ridge cupola with a hip roof. Wall meshes have real opening cutouts. All opening dimensions must fit within the wall; overlapping openings are rejected. Export converts millimetres to metres as for plates.
 
 This is an illustrative architectural model. It does not reproduce photographic textures, plants, framing, roof shingles, construction joints, or manufacturing tolerances. Measurements and hidden geometry are assumptions, recorded in evidence. The reference image alone establishes no physical scale.
+
+## Modern shed extension (v0.3)
+
+`roof.type: mono_pitch` supports a single roof plane across X, with `slope_axis: x`, `high_side: left | right`, and positive `rise`. `body.wall_height` is the low wall height; the high wall is `wall_height + rise`. Wall tops and opening validation follow the roof slope. Optional `roof.fascia_color` sets a separate fascia color.
+
+`walls.style: horizontal_panel_siding` adds horizontal seams using `panel_spacing`. Doors accept `style: flush` and `glazing_panels`, an array of up to eight rectangles with `width`, `height`, and `bottom_from_door_base`. These cannot be combined with `top_glazing`. See `site/examples/modern-shed-blueprint.json`. Gable cupolas/vents are rejected for mono-pitch roofs. Upper glazing is currently rectangular; angled glazing, slabs and support blocks are not modeled by this recipe.

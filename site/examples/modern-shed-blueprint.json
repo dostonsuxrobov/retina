@@ -1,0 +1,125 @@
+{
+  "schema": "retina.shed/v1",
+  "name": "Modern single-slope garden shed",
+  "units": "mm",
+  "compatibility": {
+    "status": "supported",
+    "requires": "Retina geometry v0.3 or later"
+  },
+  "coordinates": {
+    "up": "+z",
+    "origin": "center of floor at ground level",
+    "front": "-y",
+    "right": "+x"
+  },
+  "body": {
+    "type": "shed",
+    "width": 2400,
+    "depth": 3600,
+    "wall_height": 2300,
+    "wall_thickness": 100,
+    "floor_thickness": 80
+  },
+  "roof": {
+    "type": "mono_pitch",
+    "slope_axis": "x",
+    "high_side": "right",
+    "rise": 650,
+    "overhang": 260,
+    "thickness": 80,
+    "color": "#44484A",
+    "fascia_color": "#80634F"
+  },
+  "walls": {
+    "style": "horizontal_panel_siding",
+    "panel_spacing": 300,
+    "color": "#52595B"
+  },
+  "trim": {
+    "width": 60,
+    "depth": 25,
+    "color": "#272D31"
+  },
+  "openings": [
+    {
+      "id": "front_door",
+      "type": "single_door",
+      "style": "flush",
+      "wall": "front",
+      "center_offset": 0,
+      "bottom": 100,
+      "width": 960,
+      "height": 2160,
+      "color": "#84654F",
+      "glazing_panels": [
+        {
+          "bottom_from_door_base": 330,
+          "width": 760,
+          "height": 380
+        },
+        {
+          "bottom_from_door_base": 900,
+          "width": 760,
+          "height": 380
+        },
+        {
+          "bottom_from_door_base": 1470,
+          "width": 760,
+          "height": 380
+        }
+      ]
+    },
+    {
+      "id": "side_horizontal_window",
+      "type": "window",
+      "wall": "right",
+      "center_offset": 350,
+      "bottom": 1850,
+      "width": 1200,
+      "height": 380,
+      "panes": {
+        "columns": 1,
+        "rows": 1
+      }
+    },
+    {
+      "id": "front_clerestory",
+      "type": "window",
+      "wall": "front",
+      "center_offset": 650,
+      "bottom": 2450,
+      "width": 760,
+      "height": 180,
+      "panes": {
+        "columns": 1,
+        "rows": 1
+      }
+    }
+  ],
+  "details": [],
+  "evidence": {
+    "observed": [
+      "Rectangular shed with a single sloping roof and substantial overhang",
+      "Dark gray horizontal siding and black trim",
+      "Brown single door with three vertically stacked glass panels",
+      "Long narrow window on the visible side wall",
+      "High glazing near the roof on the door facade",
+      "Brown roof fascia"
+    ],
+    "inferred": [
+      "All dimensions, roof rise, window positions, wall thickness, and colors are estimates without a known physical scale",
+      "Illustrative footprint: 2400 x 3600 mm; low wall height 2300 mm and high wall height 2950 mm",
+      "Slope is represented across width, rising toward +X",
+      "The visible side window is assigned to the right wall so both facades appear in the default preview",
+      "Three door panels use opaque dark glazing as a visual proxy",
+      "The angled upper glazing is simplified to a rectangular clerestory that fits below the sloping roof"
+    ],
+    "unknown": [
+      "Exact dimensions and hidden wall openings",
+      "Interior, framing, roofing detail, door hardware, and foundation dimensions"
+    ],
+    "excluded": [
+      "Trees, fence, lawn, concrete pad, small support blocks, and landscaping"
+    ]
+  }
+}

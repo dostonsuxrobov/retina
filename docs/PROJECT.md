@@ -48,3 +48,9 @@ A shed blueprint was previously provided in an unsupported draft format, causing
 Validated the original JSON with real Three.js geometry: 223 meshes, finite vertex/bounding values, four wall opening ray checks, and seven malformed-input rejection cases. Verified binary GLB export and millimetre-to-metre root scaling. JavaScript syntax checks passed. Browser automation could not run in this session because the local browser executable was unavailable; visual fidelity and live WebGL interactions remain to be checked.
 
 Next: load the original shed file in the deployed app, inspect its proportions against the photo, then supply one measured dimension to establish scale. This is a coarse architectural recipe, not validated industrial reconstruction.
+
+## Modern shed reference — 2026-10-03
+
+Added a photo-derived modern shed blueprint plus single-slope roofs, slope-aware wall heights/opening validation, horizontal siding, separate fascia colors, and flush doors with multiple glass panels. Kept `retina.shed/v1` and the earlier draft input compatible. The upper angled glazing is explicitly simplified to a rectangular clerestory; all physical dimensions remain estimates.
+
+Checked modern shed (101 meshes, three wall opening ray tests, 182832-byte GLB) and original gable shed (223 meshes, four opening checks) with actual Three.js. Vertex values were finite, GLB export passed, and four malformed modern inputs were rejected. Browser visual verification remains outstanding. Next: compare both previews against their references and choose improvements based on visible mismatches.

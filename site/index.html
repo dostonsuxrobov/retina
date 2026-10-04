@@ -11,7 +11,7 @@
     <script type="importmap">
       {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
     </script>
-    <script type="module" src="./app.js?v=4"></script>
+    <script type="module" src="./app.js?v=5"></script>
   </head>
   <body>
     <header class="topbar">
@@ -44,7 +44,7 @@
             <button class="primary-button" id="build-button" type="button"><span>Build preview</span><span aria-hidden="true">→</span></button>
             <button class="secondary-button" id="download-json" type="button" title="Download this blueprint as JSON">↓ JSON</button>
           </div>
-          <div class="schema-note"><span class="note-icon">i</span><p>Supports mounting plates and gable-roof sheds. Photo-derived dimensions are estimates until you supply measurements. <a href="./examples/shed-blueprint.json" download>Download shed example</a></p></div>
+          <div class="schema-note"><span class="note-icon">i</span><p>Supports mounting plates and gable and single-slope sheds. Photo-derived dimensions are estimates until you supply measurements. <a href="./examples/shed-blueprint.json" download>Gable example</a> · <a href="./examples/modern-shed-blueprint.json" download>Modern shed example</a></p></div>
         </div>
 
         <div class="viewer-panel">
@@ -57,7 +57,7 @@
             <div class="axis-label axis-x">X</div><div class="axis-label axis-y">Y</div><div class="axis-label axis-z">Z</div>
           </div>
           <div class="model-meta"><div><span class="meta-label">BODY</span><strong id="body-summary">120 × 80 × 8 mm</strong></div><div><span class="meta-label">FEATURES</span><strong id="feature-summary">4 through-holes</strong></div><div class="inference-meta"><span class="meta-label">INFERRED</span><strong id="inference-summary">Thickness · corner radius</strong></div></div>
-          <div class="viewer-footer"><span>Geometry built from blueprint parameters</span><span class="engine-badge"><span></span> RETINA GEOMETRY · V0.2</span></div>
+          <div class="viewer-footer"><span>Geometry built from blueprint parameters</span><span class="engine-badge"><span></span> RETINA GEOMETRY · V0.3</span></div>
         </div>
       </section>
       <footer class="page-footer"><span>Early prototype · Plate and shed recipes</span><span>Pixels in. Structure out.</span></footer>

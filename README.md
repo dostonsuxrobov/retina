@@ -22,7 +22,7 @@ A single image does not reveal hidden surfaces or physical dimensions; the syste
 
 ## Prototype
 
-The browser prototype is in [`site/`](site/). It accepts a `retina.blueprint/v1` JSON file, validates and builds a parametric mounting plate with through-holes, previews it in 3D, and exports GLB. It uses WebGL where available and falls back to an SVG preview where it is not. The browser app does not call an image model yet; during this experiment, a person can provide the image here and use a generated blueprint as its input. A second recipe builds gable-roof sheds with doors, windows, siding, trim, and cupola from `retina.shed/v1` JSON; it also accepts the original `retina.shed/proposed-v1` file. Photo-derived dimensions remain estimates. See [the blueprint contract](docs/BLUEPRINT.md).
+The browser prototype is in [`site/`](site/). It accepts a `retina.blueprint/v1` JSON file, validates and builds a parametric mounting plate with through-holes, previews it in 3D, and exports GLB. It uses WebGL where available and falls back to an SVG preview where it is not. The browser app does not call an image model yet; during this experiment, a person can provide the image here and use a generated blueprint as its input. A second recipe builds gable and single-slope sheds with doors, windows, siding, trim, and cupola from `retina.shed/v1` JSON; it also accepts the original `retina.shed/proposed-v1` file. Horizontal siding and flush doors with stacked glass panels are also supported. Photo-derived dimensions remain estimates. See [the blueprint contract](docs/BLUEPRINT.md).
 
 The prototype is served from GitHub Pages through the Actions workflow in `.github/workflows/pages.yml`. Three.js and its controls/exporter are loaded from jsDelivr at runtime.
 

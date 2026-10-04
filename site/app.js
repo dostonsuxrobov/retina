@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
-import { validateShed, buildShed } from './shed.js?v=1';
+import { validateShed, buildShed } from './shed.js?v=2';
 
 const example = {
   schema: 'retina.blueprint/v1',
@@ -155,7 +155,7 @@ function buildGeometry(blueprint) {
     modelRoot.add(buildShed(blueprint));
     new THREE.Box3().setFromObject(modelRoot).getSize(modelSize);
     modelName.textContent = blueprint.name || 'Garden shed';
-    bodySummary.textContent = `${rounded(blueprint.body.width)} × ${rounded(blueprint.body.depth)} × ${rounded(blueprint.body.wall_height + blueprint.roof.rise)} mm (ridge)`;
+    bodySummary.textContent = `${rounded(blueprint.body.width)} × ${rounded(blueprint.body.depth)} × ${rounded(blueprint.body.wall_height + blueprint.roof.rise)} mm (roof)`;
     featureSummary.textContent = `${blueprint.openings.length} openings · ${blueprint.details.length} details`;
     const inferred = blueprint.evidence?.inferred ?? [];
     inferenceSummary.textContent = inferred.length ? inferred.join(' · ') : 'None specified';
