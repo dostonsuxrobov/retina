@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+import { SVGRenderer } from 'three/addons/renderers/SVGRenderer.js';
 
 const example = {
   schema: 'retina.blueprint/v1',
@@ -34,11 +35,21 @@ const scene = new THREE.Scene();
 scene.background = new THREE.Color('#edf1f0');
 scene.fog = new THREE.Fog('#edf1f0', 280, 900);
 const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 2000);
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.25;
+let renderer;
+let usingVectorFallback = false;
+try {
+  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.25;
+} catch {
+  // Some browsers and remote previews do not expose WebGL; SVGRenderer still gives an orbitable preview.
+  renderer = new SVGRenderer();
+  usingVectorFallback = true;
+  renderer.setQuality('high');
+  document.querySelector('.topbar-center').lastChild.textContent = ' Vector preview · WebGL unavailable';
+}
 viewport.prepend(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -260,7 +271,10 @@ document.querySelector('#export-glb').addEventListener('click', () => {
 
 document.querySelector('#reset-view').addEventListener('click', frameModel);
 
-renderer.setAnimationLoop(() => {
+function animate() {
   controls.update();
   renderer.render(scene, camera);
-});
+  if (usingVectorFallback) requestAnimationFrame(animate);
+}
+if (usingVectorFallback) requestAnimationFrame(animate);
+else renderer.setAnimationLoop(animate);
