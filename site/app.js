@@ -69,8 +69,11 @@ scene.add(fillLight);
 const grid = new THREE.GridHelper(500, 50, '#c2cbc8', '#dce2df');
 grid.rotation.x = Math.PI / 2;
 grid.position.z = -0.2;
-grid.material.transparent = true;
-grid.material.opacity = 0.72;
+for (const material of Array.isArray(grid.material) ? grid.material : [grid.material]) {
+  material.transparent = true;
+  material.opacity = 0.18;
+  material.depthWrite = false;
+}
 scene.add(grid);
 
 const modelRoot = new THREE.Group();

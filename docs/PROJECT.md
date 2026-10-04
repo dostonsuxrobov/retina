@@ -34,8 +34,9 @@ Build an efficient visual perception/reconstruction layer: pixels become structu
 
 - 2026-10-03: Repository supplied by the user. Added README, development instructions, project context, and a minimal ignore file for the initial write-access test.
 - 2026-10-03: Added a browser-only blueprint-to-3D prototype and a `retina.blueprint/v1` contract for plates with round through-holes. During the initial experiment, image interpretation can be done by a person or assistant; an image-model API is not connected.
-- The page validates JSON, previews deterministic geometry, and exports a GLB with dimensions converted from millimetres to metres. GitHub Actions is configured to deploy `site/` to GitHub Pages after pushes to `main`.
+- Published to https://dostonsuxrobov.github.io/retina/ with GitHub Actions configured to deploy `site/` after pushes to `main`.
+- The page validates JSON, previews deterministic geometry, and exports a GLB with dimensions converted from millimetres to metres. A live browser check confirmed the sample and valid/invalid JSON interactions; the test browser required the SVG preview because WebGL is unavailable there.
 
 ## Next step
 
-Test the deployed page with a real reference image and its blueprint. Record which dimensions were supplied versus inferred, inspect the GLB in a 3D viewer, then decide whether to refine the plate recipe or support a second object category.
+Use a real reference image to produce a blueprint and test it in the app. Record which dimensions were supplied versus inferred, inspect the GLB in a 3D viewer, then decide whether to refine the plate recipe or support a second object category.
