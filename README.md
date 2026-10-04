@@ -20,9 +20,11 @@ Proposed pipeline:
 
 A single image does not reveal hidden surfaces or physical dimensions; the system must distinguish observations from inferred details.
 
-## Current status
+## Prototype
 
-Project foundation only. No reconstruction engine, model API integration, or deployed web app exists yet.
+The first browser prototype is in [`site/`](site/). It accepts a `retina.blueprint/v1` JSON file, validates and builds a parametric mounting plate with through-holes, previews it in 3D, and exports GLB. The browser app does not call an image model yet; during this experiment, a person can provide the image here and use a generated blueprint as its input. See [the blueprint contract](docs/BLUEPRINT.md).
+
+The prototype is served from GitHub Pages through the Actions workflow in `.github/workflows/pages.yml`. Three.js and its controls/exporter are loaded from jsDelivr at runtime.
 
 The initial questions are:
 

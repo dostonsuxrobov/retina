@@ -33,8 +33,9 @@ Build an efficient visual perception/reconstruction layer: pixels become structu
 ## Progress
 
 - 2026-10-03: Repository supplied by the user. Added README, development instructions, project context, and a minimal ignore file for the initial write-access test.
-- No application or reconstruction pipeline has been implemented yet.
+- 2026-10-03: Added a browser-only blueprint-to-3D prototype and a `retina.blueprint/v1` contract for plates with round through-holes. During the initial experiment, image interpretation can be done by a person or assistant; an image-model API is not connected.
+- The page validates JSON, previews deterministic geometry, and exports a GLB with dimensions converted from millimetres to metres. GitHub Actions is configured to deploy `site/` to GitHub Pages after pushes to `main`.
 
 ## Next step
 
-Choose one narrow object category and a sample image, define a measurable quality target, then build a small end-to-end reconstruction experiment and measure quality, latency, and cost.
+Test the deployed page with a real reference image and its blueprint. Record which dimensions were supplied versus inferred, inspect the GLB in a 3D viewer, then decide whether to refine the plate recipe or support a second object category.

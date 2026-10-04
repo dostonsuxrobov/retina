@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f7" />
+    <meta name="description" content="Turn a structured Retina blueprint into editable 3D geometry." />
+    <title>Retina — Blueprint to 3D</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"}}
+    </script>
+    <script type="module" src="./app.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="Retina home"><span class="brand-mark">R</span><span>retina</span></a>
+      <div class="topbar-center"><span class="status-dot"></span> Local blueprint preview</div>
+      <a class="repo-link" href="https://github.com/dostonsuxrobov/retina" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main class="workspace">
+      <section class="intro">
+        <div class="eyebrow">IMAGE → BLUEPRINT → GEOMETRY</div>
+        <h1>Make the blueprint<br /><span>become the object.</span></h1>
+        <p>For now, I’ll turn your reference image into a structured blueprint. Edit or upload that JSON here, then inspect the geometry it produces.</p>
+      </section>
+
+      <section class="workbench" aria-label="Blueprint workbench">
+        <div class="editor-panel">
+          <div class="panel-heading">
+            <div><div class="panel-kicker">INPUT</div><h2>Blueprint JSON</h2></div>
+            <label class="icon-button" for="file-input" title="Open a JSON file" aria-label="Open a JSON file">↑<input id="file-input" type="file" accept=".json,application/json" /></label>
+          </div>
+          <div class="editor-subline"><span class="file-dot"></span><span id="file-name">mounting-plate.json</span><span class="units-pill">MM</span></div>
+          <label class="sr-only" for="blueprint">Blueprint JSON</label>
+          <textarea id="blueprint" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+          <div class="editor-footer">
+            <span id="validation" class="validation" role="status">Example blueprint loaded</span>
+            <button class="text-button" id="example-button" type="button">Reset example</button>
+          </div>
+          <div class="action-row">
+            <button class="primary-button" id="build-button" type="button"><span>Build preview</span><span aria-hidden="true">→</span></button>
+            <button class="secondary-button" id="download-json" type="button" title="Download this blueprint as JSON">↓ JSON</button>
+          </div>
+          <div class="schema-note"><span class="note-icon">i</span><p>This first pass builds a plate and round through-holes. Hidden details and dimensions remain assumptions until you provide them.</p></div>
+        </div>
+
+        <div class="viewer-panel">
+          <div class="viewer-header">
+            <div><div class="panel-kicker">OUTPUT <span class="live-pill"><span></span> LIVE</span></div><h2 id="model-name">Mounting plate</h2></div>
+            <div class="viewer-actions"><button class="icon-button view-reset" id="reset-view" type="button" title="Reset view" aria-label="Reset view">⟳</button><button class="export-button" id="export-glb" type="button">Export GLB <span aria-hidden="true">↓</span></button></div>
+          </div>
+          <div id="viewport" class="viewport">
+            <div class="viewport-hint"><span class="mouse-icon">↗</span> DRAG TO ORBIT <span class="hint-divider">·</span> SCROLL TO ZOOM</div>
+            <div class="axis-label axis-x">X</div><div class="axis-label axis-y">Y</div><div class="axis-label axis-z">Z</div>
+          </div>
+          <div class="model-meta"><div><span class="meta-label">BODY</span><strong id="body-summary">120 × 80 × 8 mm</strong></div><div><span class="meta-label">FEATURES</span><strong id="feature-summary">4 through-holes</strong></div><div class="inference-meta"><span class="meta-label">INFERRED</span><strong id="inference-summary">Thickness · corner radius</strong></div></div>
+          <div class="viewer-footer"><span>Geometry built from blueprint parameters</span><span class="engine-badge"><span></span> RETINA GEOMETRY · V0.1</span></div>
+        </div>
+      </section>
+      <footer class="page-footer"><span>Early prototype · One geometry recipe</span><span>Pixels in. Structure out.</span></footer>
+    </main>
+  </body>
+</html>

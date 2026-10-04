@@ -1,0 +1,23 @@
+{
+  "schema": "retina.blueprint/v1",
+  "name": "Four-hole mounting plate",
+  "units": "mm",
+  "body": {
+    "type": "plate",
+    "width": 120,
+    "height": 80,
+    "thickness": 8,
+    "corner_radius": 6
+  },
+  "features": [
+    { "type": "through_hole", "x": -45, "y": -25, "diameter": 8 },
+    { "type": "through_hole", "x": 45, "y": -25, "diameter": 8 },
+    { "type": "through_hole", "x": 45, "y": 25, "diameter": 8 },
+    { "type": "through_hole", "x": -45, "y": 25, "diameter": 8 }
+  ],
+  "evidence": {
+    "observed": ["flat rectangular outline", "four circular holes"],
+    "inferred": ["plate thickness is 8 mm", "corner radius is 6 mm"],
+    "unknown": ["material", "exact dimensions unless supplied"]
+  }
+}
